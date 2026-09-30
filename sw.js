@@ -1,6 +1,6 @@
 // Service worker simples: guarda só a "casca" (tela de abertura e ícones).
 // O app de conferência em si sempre vem do Google, sempre na versão mais nova.
-const CACHE = 'casca-conferencia-v2';
+const CACHE = 'casca-conferencia-v3';
 const ARQS = ['./', './index.html', './manifest.json', './icones/logo.png', './icones/icone-192.png', './icones/icone-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ARQS))); self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
